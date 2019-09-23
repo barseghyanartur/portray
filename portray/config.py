@@ -99,7 +99,10 @@ def setup_py(location: str) -> dict:
                 ):
                     for keyword in node.keywords:  # type: ignore
                         if keyword.arg == "packages":
-                            setup_config["modules"] = ast.literal_eval(keyword.value)
+                            try:
+                                setup_config["modules"] = ast.literal_eval(keyword.value)
+                            except ValueError as err:
+                                pass
                             break
                     break
     except Exception as error:
