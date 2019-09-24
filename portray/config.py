@@ -101,8 +101,9 @@ def setup_py(location: str) -> dict:
                         if keyword.arg == "packages":
                             try:
                                 setup_config["modules"] = ast.literal_eval(keyword.value)
-                            except ValueError as err:
-                                pass
+                            except ValueError as error:
+                                warnings.warn(f"Error ({error}) occurred trying to "
+                                              f"parse setup.py file: {location}")
                             break
                     break
     except Exception as error:
